@@ -1,5 +1,6 @@
 use slastymordasty;
 
+
 CREATE TABLE cake
 (
 	idCake  INTEGER NULL,
@@ -22,8 +23,8 @@ ALTER TABLE cake
 CREATE TABLE component
 (
 	idComponent  CHAR(18) NULL,
-	title  CHAR(18) NULL,
-	weight  INTEGER NULL,
+	title  CHAR(18) NOT NULL,
+	weight  INTEGER NOT NULL,
 	description  VARCHAR(200) NULL,
 	idNutritionalValue  INTEGER NOT NULL,
 	idImage  INTEGER NOT NULL
@@ -145,11 +146,11 @@ CREATE TABLE user
 	userId  MEDIUMINT NULL,
 	name  VARCHAR(20) NOT NULL,
 	email  VARCHAR(40) NOT NULL,
-	phoneNumber  VARCHAR(13) NULL,
-	password  VARCHAR(30) NULL,
-	role  SMALLINT NULL,
-	addressStreet  VARCHAR(250) NULL,
-	numHouseFlat  INTEGER NULL
+	phoneNumber  VARCHAR(13) NOT NULL,
+	password  VARCHAR(30) NOT NULL,
+	role  SMALLINT NOT NULL,
+	addressStreet  VARCHAR(250) NOT NULL,
+	numHouseFlat  INTEGER NOT NULL
 )
 ;
 
@@ -162,62 +163,62 @@ ALTER TABLE user
 
 
 ALTER TABLE cake
-	ADD FOREIGN KEY R_13 (idImage) REFERENCES image(idImage)
+	ADD FOREIGN KEY getCakeImage (idImage) REFERENCES image(idImage)
 ;
 
 
 ALTER TABLE cake
-	ADD FOREIGN KEY R_15 (idNutritionalValue) REFERENCES nutritionalValue(idNutritionalValue)
+	ADD FOREIGN KEY getNutrValue (idNutritionalValue) REFERENCES nutritionalValue(idNutritionalValue)
 ;
 
 
 
 ALTER TABLE component
-	ADD FOREIGN KEY R_16 (idNutritionalValue) REFERENCES nutritionalValue(idNutritionalValue)
+	ADD FOREIGN KEY getNutritionValue (idNutritionalValue) REFERENCES nutritionalValue(idNutritionalValue)
 ;
 
 
 ALTER TABLE component
-	ADD FOREIGN KEY R_18 (idImage) REFERENCES image(idImage)
+	ADD FOREIGN KEY getComponentImage (idImage) REFERENCES image(idImage)
 ;
 
 
 
 ALTER TABLE components
-	ADD FOREIGN KEY R_19 (idFinalProduct) REFERENCES constructor(idFinalProduct)
+	ADD FOREIGN KEY getProducts (idFinalProduct) REFERENCES constructor(idFinalProduct)
 ;
 
 
 ALTER TABLE components
-	ADD FOREIGN KEY R_21 (idComponent) REFERENCES component(idComponent)
+	ADD FOREIGN KEY getComponents (idComponent) REFERENCES component(idComponent)
 ;
 
 
 
 ALTER TABLE constructor
-	ADD FOREIGN KEY R_14 (idImage) REFERENCES image(idImage)
+	ADD FOREIGN KEY getFinalImage (idImage) REFERENCES image(idImage)
 ;
 
 
 
 ALTER TABLE orders
-	ADD FOREIGN KEY R_9 (userId) REFERENCES user(userId)
+	ADD FOREIGN KEY getUserOrderId (userId) REFERENCES user(userId)
 ;
 
 
 
 ALTER TABLE orderProd
-	ADD FOREIGN KEY R_10 (idDessert) REFERENCES cake(idCake)
+	ADD FOREIGN KEY getCakes (idDessert) REFERENCES cake(idCake)
 ;
 
 
 ALTER TABLE orderProd
-	ADD FOREIGN KEY R_11 (type) REFERENCES constructor(idFinalProduct)
+	ADD FOREIGN KEY getConstructorProducts (type) REFERENCES constructor(idFinalProduct)
 ;
 
 
 ALTER TABLE orderProd
-	ADD FOREIGN KEY R_12 (orderId) REFERENCES orders(orderId)
+	ADD FOREIGN KEY getOrder (orderId) REFERENCES orders(orderId)
 ;
 
 
